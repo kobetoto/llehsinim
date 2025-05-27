@@ -6,7 +6,7 @@
 /*   By: thodavid <thodavid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:58:24 by thodavid          #+#    #+#             */
-/*   Updated: 2025/05/26 16:47:00 by thodavid         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:27:27 by thodavid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,27 @@ void ft_export(t_list **envp_lst, char *key, char *value)
         return ;
     new_node->content = full_line;
     ft_lstadd_back(envp_lst, new_node);
+}
+
+void ft_export_var(char *line, t_list **env)
+{
+    char    **tab;
+    char    *key;
+    char    *value;
+
+    tab = ft_split(line, ' ');
+    if (tab == NULL)
+    {
+        ft_free_split(tab);
+        return;
+    }
+    if(ft_strcmp(tab[0], "export ") == 0)
+    {
+        key = ft_get_key(tab[1]);
+        value = ft_get_value(tab[1]);
+        ft_export(env, key, value);
+    }
+    return;
 }
 
 char *ft_expand_variable(char *line, t_list **env)
@@ -106,4 +127,6 @@ char     *ft_get_key(char *s)
     key[i] = '\0'; 
     return (key);
 }
+
+
 
