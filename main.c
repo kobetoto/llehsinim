@@ -41,7 +41,7 @@ int	main(int ac, char **av, char **envp)
 		if (test_expand != NULL)
 			printf("%s\n", test_expand);
 		ft_export_var(line, &envp_lst);
-		exec_cmd(line, &envp_lst);
+		exec_cmd(line, &envp_lst);//en cours.............
 		// if (!parse_commands(line, &lst))
 		// {
 		// 	printf("Erreur: parsing des commandes échoué\n");
