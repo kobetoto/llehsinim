@@ -1,36 +1,17 @@
-#include "../includes/main.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thodavid <thodavid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/25 21:36:48 by rcini-ha          #+#    #+#             */
+/*   Updated: 2025/06/04 16:39:55 by thodavid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int main(int ac, char **av, char **envp)
-{
-    (void) ac;
-    (void) av;
-    (void) envp;
-    char    *line = NULL;
-    t_token *lst = NULL;
-    int i = 0;
+#include "main.h"
 
-    while(1)
-    {
-        line = readline("bash$ ");
-        if (line == NULL)
-            break;
-		if (*line)
-			add_history(line);
-        i = 0;
-        lst = ft_lexer(line);
-        while (lst)
-        {
-            i++;
-            printf("node'%i'\n%s => %i\n\n",i ,lst->value, lst->type);
-            lst = lst->next;
-        }
-        free(line);
-    }
-    return (0);
-}
-
-
-//main ->dev
 int minishell(int ac, char **av, char **env)
 {
 	char *line;
@@ -104,3 +85,14 @@ int minishell(int ac, char **av, char **env)
 	}
 	return 1;
 }
+
+int main(int ac, char **av, char **env)
+{
+	if (!minishell(ac, av, env))
+		return 1;
+	// #todo GESTION DE FREE
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+	return (0);
+}
+
